@@ -27,19 +27,20 @@ public class LionTest {
     }
 
     @Test
-    public void lionConstructorWrongSexReturnError() throws Exception {
-        try {
+    public void lionConstructorWrongSexReturnError() {
+        Exception exception = assertThrows(Exception.class, () -> {
             lion = new Lion(feline, "Гермафродит");
-        } catch (Exception e) {
-            assertEquals("Используйте допустимые значения пола животного - самец или самка", e.getMessage());
-        }
+        });
+
+        assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
     }
 
     @Test
     public void getFoodReturnPredatorFood() throws Exception {
         lion = new Lion(feline, "Самка");
-        Mockito.when(feline.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+        Mockito.when(feline.getFood("Хищник")).thenReturn(expectedFood);
 
-        assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
+        assertEquals(expectedFood, lion.getFood());
     }
 }
