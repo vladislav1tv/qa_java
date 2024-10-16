@@ -9,13 +9,13 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class LionParamTest {
     private String sex;
-    private Boolean gasMane;
+    private Boolean hasMane; // Исправлено: hasMane вместо gasMane
     private Lion lion;
-    private Feline feline;
+    private Feline feline; // Добавлена переменная feline
 
-    public LionParamTest(String sex, Boolean gasMane) {
+    public LionParamTest(String sex, Boolean hasMane) {
         this.sex = sex;
-        this.gasMane = gasMane;
+        this.hasMane = hasMane;
     }
 
     @Parameterized.Parameters
@@ -28,9 +28,10 @@ public class LionParamTest {
 
     @Test
     public void doesHaveMane() throws Exception {
-        lion = new Lion(feline, sex);
+        feline = new Feline(); // Инициализирована feline
+        lion = new Lion(feline, sex); // Передан feline в конструктор Lion
 
-        assertEquals(gasMane, lion.doesHaveMane());
+        assertEquals(hasMane, lion.doesHaveMane());
     }
 }
 
