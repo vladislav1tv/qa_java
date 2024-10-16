@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class AnimalTest {
     private Animal animal;
@@ -26,12 +27,11 @@ public class AnimalTest {
     }
 
     @Test
-    public void getFoodInsectivorousReturnErrorString() throws Exception {
-        try {
+    public void getFoodInsectivorousReturnErrorString() {
+        Exception exception = assertThrows(Exception.class, () -> {
             animal.getFood("Насекомоядные");
-        } catch (Exception e) {
-            assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
-        }
+        });
+        assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", exception.getMessage());
     }
 
     @Test
